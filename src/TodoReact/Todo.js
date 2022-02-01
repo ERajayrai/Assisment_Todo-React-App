@@ -19,8 +19,7 @@ export const Todo = () => {
   const [isEditItem, setIsEditItem] = useState("");
   const [toggleButton, setToggleButton] = useState(false);
   const [textDeco, setTextDeco] = useState("none");
-  const [click, setClick] = useState(false);
-  const addItems =async () => {
+  const addItems = async () => {
     if (!input) {
       alert("fill blanks")
     } else if (input && toggleButton) {
@@ -41,19 +40,19 @@ export const Todo = () => {
         name: input
       }
       setItems([...items, myNewInputData]);
-      
+
     }
   }
   const checkedItem = (index) => {
     setTextDeco('line-through');
-      setItems(
-        items.map((curElem) => {
-          if (curElem.id === index) {
-            return { ...curElem, name: input, textDeco: textDeco };
-          }
-          return curElem;
-        })
-      );
+    setItems(
+      items.map((curElem) => {
+        if (curElem.id === index) {
+          return { ...curElem, name: input, textDeco: textDeco };
+        }
+        return curElem;
+      })
+    );
 
   };
 
@@ -85,28 +84,28 @@ export const Todo = () => {
             <figcaption>Add Your List Here ✌</figcaption>
           </figure>
           <div className="addItems">
-            <input type="text" value={input}  onChange={(event) => setInput(event.target.value)} placeholder="✍ add items" className="form-control" />
-              <i className="fa fa-plus add-btn" onClick={addItems}></i>
+            <input type="text" value={input} onChange={(event) => setInput(event.target.value)} placeholder="✍ add items" className="form-control" />
+            <i className="fa fa-plus add-btn" onClick={addItems}></i>
           </div>
           <div className="showItems">
             {items.map((curElem, index) => {
               return (
 
                 <div className="eachItem">
-                 {toggleButton ? (
-               <>
-            		<input type="text"   onChange={(event) => setInput(event.target.value)} placeholder="edit Item" className="form-control" />
-              		<i className="far fa-edit add-btn" onClick={addItems}></i>
-		</>
-            ) : (
-         	<><h3 style={{ 'text-decoration': curElem.textDeco }} >{curElem.name}</h3>
-                  <h3 style={{ 'text-decoration': curElem.textDeco }} >{curElem.id}</h3>
-                  <div className="todo-btn">
-                    <i class="far fa-edit add-btn" style={{ 'margin-left': '0px' }} onClick={() => editItem(curElem.id)}></i>
-                    <button type="button" id="curElem.id" h3 style={{ width: '100px' }} onClick={() => { checkedItem(curElem.id) }} >done</button>
-                  </div> </> 
- 
-            )}
+                  {toggleButton ? (
+                    <>
+                      <input type="text" onChange={(event) => setInput(event.target.value)} placeholder="edit Item" className="form-control" />
+                      <i className="far fa-edit add-btn" onClick={addItems}></i>
+                    </>
+                  ) : (
+                    <><h3 style={{ 'text-decoration': curElem.textDeco }} >{curElem.name}</h3>
+                      <h3 style={{ 'text-decoration': curElem.textDeco }} >{curElem.id}</h3>
+                      <div className="todo-btn">
+                        <i class="far fa-edit add-btn" style={{ 'margin-left': '0px' }} onClick={() => editItem(curElem.id)}></i>
+                        <button type="button" id="curElem.id" h3 style={{ width: '100px' }} onClick={() => { checkedItem(curElem.id) }} >done</button>
+                      </div> </>
+
+                  )}
                 </div>
               );
             })}

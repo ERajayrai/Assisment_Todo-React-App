@@ -6,7 +6,7 @@ import { Todo } from './TodoReact/Todo';
 function App() {
   return (
     <>
-      <Todo/>
+      <Todo />
     </>
   );
 }
