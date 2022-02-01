@@ -18,6 +18,8 @@ export const Todo = () => {
     const [items,setItems] = useState([])
     const [isEditItem, setIsEditItem] = useState("");
     const [toggleButton, setToggleButton] = useState(false);
+    const [textDeco,setTextDeco]=useState("none");
+    var date=Date.now().toLocaleString
     const addItems=()=>{
         if(!input){
             alert("fill blanks")
@@ -36,18 +38,20 @@ export const Todo = () => {
             setToggleButton(false);
             }else{
             const myNewInputData={
-                id:new Date().getTime().toString(),
+                id:new Date().toLocaleString(),
                 name:input
             }
             setItems([...items,myNewInputData])
         }
     }
-    const deleteItem = (index) => {
-        const updatedItems = items.filter((curElem) => {
-          return curElem.id !== index;
-        });
-        setItems(updatedItems);
-      };
+    const checkedItem= (index) =>{
+      items.filter((curElem) => {
+          if(curElem.id === index){
+            setTextDeco('line-through')
+          }
+      });
+    };
+  
         // remove all the elements
   const removeAll = () => {
     setItems([]);
@@ -88,10 +92,11 @@ export const Todo = () => {
                             return  (
                                 
                         <div className="eachItem">
-                        <h3>{curElem.name}</h3>
+                        <h3 style={{'text-decoration':textDeco}} >{curElem.name}</h3>
+                        <h3>{curElem.id}</h3>
                         <div className="todo-btn">
-                        <i class="far fa-edit add-btn" onClick={() => editItem(curElem.id)}></i>
-                        <i class="far fa-trash-alt add-btn" onClick={()=>{deleteItem(curElem.id)}}></i>
+                        <i class="far fa-edit add-btn" style={{'margin-left':'0px'}} onClick={() => editItem(curElem.id)}></i>
+                        <input type="checkbox" id="vehicle1"h3 style={{width:'20px',height:'20px'}} onClick={()=>{checkedItem(curElem.id)}} />
                         </div>
                     </div>
                             );
